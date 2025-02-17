@@ -1,85 +1,93 @@
-const download = document.querySelector(".download");
-const dark = document.querySelector(".dark");
-const light = document.querySelector(".light");
-const qrContainer = document.querySelector("#qr-code");
-const qrText = document.querySelector(".qr-text");
-const shareBtn = document.querySelector(".share-btn");
-const sizes = document.querySelector(".sizes");
-dark.addEventListener("input", handleDarkColor);
-light.addEventListener("input", handleLightColor);
-qrText.addEventListener("input", handleQRText);
-sizes.addEventListener("change", handleSize);
-shareBtn.addEventListener("click", handleShare);
-let colorLight = "#fff",
-    colorDark = "#000",
-    text = defaultUrl,
-    size = 300;
+/*===== MENU SHOW =====*/ 
 
-function handleDarkColor(e) {
-    colorDark = e.target.value;
-    generateQRCode();
-}
+const showMenu = (toggleId, navId) =>{
 
-function handleLightColor(e) {
-    colorLight = e.target.value;
-    generateQRCode();
-}
+    const toggle = document.getElementById(toggleId),
 
-function handleQRText(e) {
-    const value = e.target.value;
-    text = value;
-    if (!value) {
-        text = defaultUrl;
+    nav = document.getElementById(navId)
+
+    if(toggle && nav){
+
+        toggle.addEventListener('click', ()=>{
+
+            nav.classList.toggle('show')
+
+        })
+
     }
-    generateQRCode();
+
 }
 
-async function generateQRCode() {
-    qrContainer.innerHTML = "";
-    new QRCode("qr-code", {
-        text,
-        height: size,
-        width: size,
-        colorLight,
-        colorDark,
-    });
-    download.href = await resolveDataUrl();
+showMenu('nav-toggle','nav-menu')
+
+/*==================== REMOVE MENU MOBILE ====================*/
+
+const navLink = document.querySelectorAll('.nav__link')
+
+function linkAction(){
+
+    const navMenu = document.getElementById('nav-menu')
+
+    navMenu.classList.remove('show')
+
 }
 
-async function handleShare() {
-    setTimeout(async () => {
-        try {
-            const base64url = await resolveDataUrl();
-            const blob = await (await fetch(base64url)).blob();
-            const file = new File([blob], "QRCode.png", {
-                type: blob.type,
-            });
-            await navigator.share({
-                files: [file],
-                title: text,
-            });
-        } catch (error) {
-            alert("Your browser doesn't support sharing.");
-        }
-    }, 100);
+navLink.forEach(n => n.addEventListener('click', linkAction))
+
+/*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+
+const sections = document.querySelectorAll('section[id]')
+
+const scrollActive = () =>{
+
+    const scrollDown = window.scrollY
+
+  sections.forEach(current =>{
+
+        const sectionHeight = current.offsetHeight,
+
+              sectionTop = current.offsetTop - 58,
+
+              sectionId = current.getAttribute('id'),
+
+              sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+
+        
+
+        if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
+
+            sectionsClass.classList.add('active-link')
+
+        }else{
+
+            sectionsClass.classList.remove('active-link')
+
+        }                                                    
+
+    })
+
 }
 
-function handleSize(e) {
-    size = e.target.value;
-    generateQRCode();
-}
+window.addEventListener('scroll', scrollActive)
 
-function resolveDataUrl() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const img = document.querySelector("#qr-code img");
-            if (img.currentSrc) {
-                resolve(img.currentSrc);
-                return;
-            }
-            const canvas = document.querySelector("canvas");
-            resolve(canvas.toDataURL());
-        }, 50);
-    });
-}
-generateQRCode();
+/*===== SCROLL REVEAL ANIMATION =====*/
+
+const sr = ScrollReveal({
+
+    origin: 'top',
+
+    distance: '60px',
+
+    duration: 2000,
+
+    delay: 200,
+
+});
+
+sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
+
+sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
+
+sr.reveal('.home__social-icon',{ interval: 200}); 
+
+sr.reveal('.skills__data, .showcase__img, .contact__input',{interval: 200}); 

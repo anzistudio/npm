@@ -56,10 +56,10 @@ const App = () => {
 
 
 
-    React.createElement("img", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/123024/leopard2.jpg" }), /*#__PURE__*/
-    React.createElement("img", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/123024/lion2.jpg" }), /*#__PURE__*/
-    React.createElement("img", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/123024/tiger2.jpg" }), /*#__PURE__*/
-    React.createElement("img", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/123024/bear2.jpg" }), /*#__PURE__*/
+    React.createElement("img", { src: "https://thailandbettafish.com/cdn/shop/collections/Koi_Candy_Betta_Fish.png?v=1691207624" }), /*#__PURE__*/
+    React.createElement("img", { src: "https://naturalenvironmentaquatix.com/cdn/shop/products/Untitleddesign-71.jpg?v=1643312546" }), /*#__PURE__*/
+    React.createElement("img", { src: "https://aquarift.fr/wp-content/uploads/Betta-plakat-avatar-blue.jpg" }), /*#__PURE__*/
+    React.createElement("img", { src: "https://thailandbettafish.com/cdn/shop/collections/Avatar.jpg?v=1701862854&width=1920" }), /*#__PURE__*/
 
     React.createElement("div", { id: "pagination" }, /*#__PURE__*/
     React.createElement("button", { class: "active", "data-slide": "0" }), /*#__PURE__*/
